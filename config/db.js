@@ -14,7 +14,7 @@ const connectDB = async (app) => {
         });
 
         console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
-        //app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
+        app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
 
     }catch(error){
         console.error(`Error: ${error.message}`.red.underline.bold);
