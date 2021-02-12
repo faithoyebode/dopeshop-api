@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
 import path from 'path';
 import express from 'express';
 import multer from 'multer';
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -34,7 +37,7 @@ const upload = multer({
 
 router.post('/', upload.single('image'), (req, res) => {
     const filePath = req.file.path.replace(/\\/g, "/");
-    res.send(`${filePath}`);
+    res.send(`${process.env.URL}/${filePath}`);
 });
 
 export default router;
