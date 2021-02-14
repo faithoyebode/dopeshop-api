@@ -117,7 +117,7 @@ const createProductReview = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     if(product){
-        const alreadyReviewed = product .reviews.find(r => r.user.toString() === req.user._id.toString());
+        const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString());
 
         if(alreadyReviewed){
             res.status(400);
@@ -147,6 +147,15 @@ const createProductReview = asyncHandler(async (req, res) => {
     
 });
 
+//@desc Get top rated products
+//@route POST /api/products/top
+//@access Private
+const getTopProducts = asyncHandler(async (req, res) => {
+    const products = await Product.find({}).sort({ rating: -1}).limit(3);
+
+    res.json(products);
+    
+});
 
 export { 
     getProducts, 
@@ -154,5 +163,6 @@ export {
     deleteProduct,
     createProduct,
     updateProduct,
-    createProductReview
+    createProductReview,
+    getTopProducts
 }
